@@ -1,0 +1,51 @@
+QUESTION LINK --  https://leetcode.com/problems/find-duplicate-file-in-system/
+
+class Solution {
+public:
+    vector<vector<string>> findDuplicate(vector<string>& paths) {
+        unordered_map<string,vector<string>> m;               // <content,files with this content>
+                                                              //To store the files content wise 
+        vector<vector<string>> ans;                           // For returning final answer.
+        
+        for(int i=0;i<paths.size();i++){                      //Iterating over path:paths one by one
+            string path = paths[i];                           //curr path
+            
+            string temp = "";                                 //Temporary string var used for storing chars as we iterate.
+            string dir_path = "";                             //Extract directory name and store in dir_name variable
+            string file_name = "";                            //To store the file name in the curr path
+            string content = "";                              //To store the content of the file
+            bool isFirst = true;                              //bool var to check if space occuring for first time.
+                                                              //If occuring for first time, then store the dir_name.
+            for(int j=0;j<path.length();j++){
+                if(path[j]==' ' && isFirst){                  //For extracting dir name
+                    dir_path = temp;
+                    isFirst = false;
+                    temp = "";                                //Now, empty the temp string
+                } 
+                
+                if(path[j]=='('){                             //If opening bracket is encountered, that means store the file name.
+                    file_name = temp;
+                    temp = "";                                //Now empty the temp string
+                }
+                
+                if(path[j]==')'){                             //If closing bracket is found, that means you can save the content of the curr file.
+                    content = temp;
+                    temp = "";                               //Empty the temp
+                    
+                    //push to the ans
+                    string res = dir_path+"/"+file_name;     //Now, you can form a complete path for a file
+                    m[content].push_back(res);               //Push the file to the corresponding content mapping.
+                }
+                
+                if(path[j]!=' ' && path[j]!='(' && path[j]!=')') temp+=path[j];  //Add only required chars in the temp 
+            }
+        }
+        
+        for(auto p:m){                     //Now you just need to iterate over the map and form the vector<vector<string>> ans
+            if(p.second.size()>1)         //Very Important, they have asked for returning only duplicate files.
+                                          //So, you need to add only those.
+            ans.push_back(p.second);
+        }
+        return ans;
+    }
+};	

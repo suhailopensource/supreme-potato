@@ -1,0 +1,69 @@
+int countRev (string s)
+{
+    // your code here
+    int n = s.length();
+    stack<char> st;
+    if(s.length()%2){
+        return -1;
+    }
+    for(int i = 0; i<n;i++){
+        if(s[i] == '{'){
+            st.push(s[i]);
+        }else{
+            if(!st.empty() && st.top()== '{'){
+                st.pop();
+            }else{
+                st.push(s[i]);
+            }
+        }
+    }
+    
+    int open = 0;
+    int close = 0;
+    while(!st.empty()){
+        if(st.top() == '{'){
+            open++;
+        }else{
+            close++;
+        }
+        st.pop();
+    }
+    return double(ceil(open/2.0) + ceil(close/2.0));
+}
+
+
+METHOD @@ 2 WITHOUT STACK
+
+
+
+
+
+
+int countRev (string s)
+{
+    // your code here
+    if(s.length() % 2)
+       return -1;
+       
+    int  n =  s.length();
+    int open = 0;
+    int close = 0;
+    for(int i = 0; i < n; i++)
+    {
+        if(s[i] == '{')
+          {
+           open++;   
+          }
+        else
+        {
+            if(open > 0)
+              open--;
+            else
+               close++;
+        }
+    }
+    
+    double ans = (ceil(open/2.0) + ceil(close/2.0));
+    
+    return int(ans);
+}

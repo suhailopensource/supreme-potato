@@ -1,0 +1,39 @@
+QUESTION LINK---   https://practice.geeksforgeeks.org/problems/count-occurences-of-anagrams5839/1
+
+
+
+class Solution{
+public:
+	int search(string pat, string txt) {
+	    // code here
+	unordered_map<char,int>mt,mp;
+    int count=0;
+    
+    int n=pat.length();
+    int m=txt.length();
+    
+    for(int i=0;i<n;i++){
+        mp[pat[i]]++;
+        mt[txt[i]]++;
+    }
+    if(mp==mt){
+        count++;
+    }
+    
+    for(int i=n;i<m;i++){
+        mt[txt[i]]++;
+        mt[txt[i-n]]--;
+        if(mt[txt[i-n]]==0){
+            mt.erase(txt[i-n]);
+        }
+        if(mp==mt){
+        count++;
+        }
+    }
+    
+    
+       return count;
+	    
+	}
+
+};

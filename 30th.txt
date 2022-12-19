@@ -1,0 +1,19 @@
+class Solution{
+    public:
+    long long findMinDiff(vector<long long> arr, long long n, long long m){
+    //code
+    if(n==0 || m==0){
+        return 0;
+    }
+    sort(arr.begin(),arr.end());
+    if(n < m){
+        return -1;
+    }
+    int mindiff = INT_MAX;
+    for(int i = 0; i+m-1 < n ; i++){
+        int diff = arr[i+m-1] - arr[i];
+        mindiff = min(mindiff, diff);
+    }
+    return mindiff;
+    }   
+};

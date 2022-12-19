@@ -1,0 +1,64 @@
+class Solution{
+public:
+
+	// Function to find maximum product subarray
+	long long maxProduct(vector<int> arr, int n) {
+	    // code here
+	    long long maxans1 = INT_MIN;
+	    long long maxans2 = INT_MIN;
+	    long long currmax = 1;
+	    for(int i = 0;i<n;i++){
+	        currmax = currmax*arr[i];
+	        maxans1 = max(maxans1, currmax);
+	        if(currmax == 0){
+	          currmax = 1;
+	        }
+	    }
+	    currmax = 1;
+	    for(int i = n-1; i>=0;i--){
+	        currmax = currmax * arr[i];
+	         maxans2 = max(maxans2, currmax);
+	        if(currmax == 0){
+	          currmax = 1;
+	        }
+	    }
+	  if(maxans1>maxans2){
+	      return maxans1;
+	  }
+	  return maxans2;
+	}
+};
+
+METHOD 2 @@
+
+class Solution{
+public:
+
+	// Function to find maximum product subarray
+	long long maxProduct(vector<int> arr, int n) {
+	    // code here
+	    long long int max_ending_here = arr[0];
+  
+        // min negative product ending
+        // at the current position
+        long long int min_ending_here = arr[0];
+      
+        // Initialize overall max product
+        long long int max_so_far = arr[0];
+        /* Traverse through the array.
+        the maximum product subarray ending at an index
+        will be the maximum of the element itself,
+        the product of element and max product ending previously
+        and the min product ending previously. */
+        for (int i = 1; i < n; i++) {
+            long long int temp = max(1LL*arr[i], max(arr[i] * max_ending_here,
+                             arr[i] * min_ending_here ));
+            min_ending_here
+                = min(1LL*arr[i], min(arr[i] * max_ending_here,
+                        arr[i] * min_ending_here));
+            max_ending_here = temp;
+            max_so_far = max(max_so_far, max_ending_here);
+        }
+        return max_so_far;
+    }
+};

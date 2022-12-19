@@ -1,0 +1,16 @@
+
+
+ int max1=INT_MIN,sum=0;
+      for(int i=0;i<n;i++)
+      {
+          // step 1 add new elements
+          sum+=arr[i];
+          
+          // step 2  update ans if possible
+           max1=max(max1,sum);
+          
+          // step 3 check sum 
+          if(sum<0)
+              sum=0;
+      }
+      return max1;

@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int main(){
+    int n;
+    cin>>n;
+    int arr[n][n];
+    for(int i =0; i < n; i++){
+        for(int j = 0; j<n;j++){
+            cin >> arr[i][j];
+        }
+    }
+    int max_value = INT_MIN;
+
+    for(int i = 0; i<n-1;i++){
+        for(int j = 0; j< n-1; j++){
+            for(int k = i+1;k<n;k++){
+                for(int l = j+1; l<n;l++){
+                    if(max_value < (arr[k][l] - arr[i][j])){
+                        max_value = arr[k][l] - arr[i][j];
+                    }
+                }
+            }
+        }
+    }
+
+     cout << max_value;
+
+}

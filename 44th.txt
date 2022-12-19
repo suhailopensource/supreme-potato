@@ -1,0 +1,22 @@
+class Solution{
+public:	
+	
+	void rotateMatrix(vector<vector<int>>& arr, int n) {
+	    // code here   
+	    for(int i =0; i< n;i++){
+	        for(int j = i+1; j<n;j++){
+	            swap(arr[i][j],arr[j][i]);
+	        }
+	    }
+	    for(int i = 0; i<n;i++){
+	        int lo = 0, hi = n-1;
+	        while(lo < hi){
+	            swap(arr[lo][i],arr[hi][i]);
+	            lo++;
+	            hi--;
+	        }
+	    }
+	   
+	}
+
+};

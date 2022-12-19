@@ -1,0 +1,26 @@
+class Solution{
+  public:
+
+    int smallestSubWithSum(int arr[], int n, int x)
+    {
+        int ans=n;
+        int sum=0,maxsum=0;
+        int j=0,fl=0;
+        for(int i=0;i<n;i++)
+        {
+            sum+=arr[i];
+            if(sum>x)
+            {
+                while(sum>x)
+                {
+                    ans=min(ans,(i-j+1));
+                    fl=1;
+                    sum-=arr[j];
+                    j++;
+                }
+            }
+        }
+        if(fl==0) return 0;
+        else return ans;
+    }
+};

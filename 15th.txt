@@ -1,0 +1,54 @@
+
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        int n=nums.size();
+        int k=-1;
+        
+        //finding first element which is lesser than its adjacent
+        
+        for(int i=n-2;i>=0;i--)     
+        {
+            if(nums[i]<nums[i+1])
+            {
+                k=i;
+                break;
+            }
+        }
+        
+        //if nums vector is in decreasing order, reverse whole vector and return
+        
+        if(k==-1)
+        {
+            reverse(nums.begin(),nums.end());
+            return;
+        }
+        
+        //finding first element from last which is greater than nums[k] and swaps them
+        
+        for(int i=n-1;i>k;i--)
+        {
+            if(nums[i]>nums[k])
+            {
+                swap(nums[i],nums[k]);
+                break;
+            }
+        }
+        
+        //reverse from k+1 to last
+        
+        reverse(nums.begin()+k+1,nums.end());
+        return;
+    }
+};
+
+
+
+METHOD 2
+
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        next_permutation(nums.begin(),nums.end());
+    }
+};

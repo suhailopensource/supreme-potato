@@ -1,0 +1,117 @@
+class Solution
+{
+    public:    
+       vector <int> commonElements (int a[], int b[], int c[], int n1, int n2, int n3)
+        {
+            //code here.
+            vector<int> v;
+            int i = 0, j = 0, k = 0;
+            while(i<n1 && j<n2 && k<n3){
+                if(a[i] == b[j] && b[j]==c[k]){
+                    if(a[i] == a[i-1]){
+                        i++;
+                        continue;
+                    }
+                    if(b[j] == b[j-1]){
+                        j++;
+                        continue;
+                    }
+                    if(c[k] == c[k-1]){
+                        k++;
+                        continue;
+                    }
+                    v.push_back(b[j]);
+                    i++;j++;k++;
+                    continue;
+                }
+                if(a[i] < b[j]){
+                    i++;
+                }
+                else if(b[j] < c[k]){
+                    j++;
+                }
+                else{
+                   k++; 
+                }
+               
+            }
+            return v;
+        }
+
+};
+
+
+METHOD 2;@@
+
+class Solution
+{
+    public:    
+       vector <int> commonElements (int a[], int b[], int c[], int n1, int n2, int n3)
+        {
+            //code here.
+            vector<int> v;
+            set<int> s;
+            int i = 0, j = 0, k = 0;
+            while(i<n1 && j<n2 && k<n3){
+                if(a[i] < b[j]){
+                    i++;
+                }
+                else if(b[j] < c[k]){
+                    j++;
+                }
+               else if(a[i] == b[j] && b[j]==c[k]){
+                    s.insert(a[i]);
+                    i++;
+                    j++;
+                    k++;
+                }
+                else{
+                   k++; 
+                }
+            }
+                 for(int i : s){
+                     v.push_back(i);
+                 }
+            return v;
+        }
+
+};
+
+METHOD 3@@
+
+class Solution
+{
+    public:    
+       vector <int> commonElements (int a[], int b[], int c[], int n1, int n2, int n3)
+        {
+            //code here.
+             vector<int> v;
+            set<int> s1, s2, s3;
+            unordered_map<int,int> m;
+            for(int i = 0; i<n1;i++){
+                s1.insert(a[i]);
+            }
+            for(int i = 0; i<n2;i++){
+                s2.insert(b[i]);
+            }
+            for(int i = 0; i<n3;i++){
+                s3.insert(c[i]);
+            }
+            
+            for(int i : s1){
+                m[i]++;
+            }
+            for(int i : s2){
+                m[i]++;
+            }
+            for(int i : s3){
+                m[i]++;
+                if(m[i] == 3){
+                    v.push_back(i);
+                }
+            }
+            return v;
+        }
+
+};
+

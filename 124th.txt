@@ -1,0 +1,53 @@
+
+class Solution 
+{
+    public:
+    static bool ispossible(int barrier, int n , int a[], int m){
+        int allocatedstu = 1 , pages = 0;
+        for(int i =0; i < n;i++){
+            if(a[i] > barrier){
+                return false;
+            }
+            if(a[i] + pages > barrier){
+                allocatedstu += 1;
+                pages = a[i];
+            if(allocatedstu > m){
+            return false;
+            }
+            }
+            else{
+                 pages += a[i];
+            }
+        }
+        return true;
+    }
+    
+    //Function to find minimum number of pages.
+    int findPages(int A[], int N, int M) 
+    {
+        //code here
+        if(M > N){
+            return -1;
+        }
+        long long sum = 0;
+        for (int i = 0; i < N; i++){
+               sum += A[i];
+        }
+       long long int low = 0;
+       long long int high = sum;
+       long long int res = -1;
+       for(int i =0; i<N ;i++){
+           high+=A[i];
+       }
+       while(low <= high){
+          long long int mid = (low + high) / 2;
+           if(ispossible(mid, N , A , M)){
+               res = mid;
+               high = mid - 1;
+           }else{
+               low = mid + 1;
+           }
+       }
+      return res;
+    }
+};

@@ -1,0 +1,38 @@
+class Solution
+{
+    public:
+        int findNum(int n)
+        {
+            //complete the function here
+            int h = 1000000;
+            int l = 0;
+            int res = -1;
+            
+            while(l <= h)
+            {
+                int mid = l + (h - l)/2;
+                
+                int noOfZeroes = 0;
+                int divi = 5;
+                while(mid/divi != 0)
+                {
+                    noOfZeroes += mid/divi;
+                    divi *= 5;
+                }
+                
+                if(noOfZeroes == n)
+                {
+                    return (mid/5) * 5;
+                }
+                else if(noOfZeroes > n)
+                {
+                    h = mid - 1;
+                }
+                else
+                {
+                    l = mid + 1;
+                }
+            }
+            //return res;
+        }
+};

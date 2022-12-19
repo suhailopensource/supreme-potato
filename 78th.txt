@@ -1,0 +1,67 @@
+
+class Solution{
+  public:
+  bool chk_valid(string str){
+      int n = str.length();
+      if(n==0 || n>3 || (str[0] == '0' && n > 1) || stoi(str) > 255){
+          return false;
+      }
+      return true;
+  }
+    vector<string> genIp(string &s) {
+        // Your code here
+        vector<string> ans;
+        int n = s.length();
+        for(int i=0; i<n-3;i++){
+            for(int j =i+1;j<n-2;j++){
+                for(int k = j+1;k<n-1;k++){
+                    string A = s.substr(0,i+1);
+                    string B = s.substr(i+1,j-i);
+                    string C = s.substr(j+1,k-j);
+                    string D = s.substr(k+1,n-1-k);
+                    
+                    if(chk_valid(A) && chk_valid(B) && chk_valid(C) && chk_valid(D)){
+                        string temp = A + '.' + B + '.' + C + '.' + D;
+                        ans.push_back(temp);
+                    }
+                }
+            }
+        }
+        if(ans.empty()){
+           ans.push_back("-1");
+        }else{
+           return ans;
+        }
+    }
+
+};
+
+
+
+SAME METHOD BUT DIFFF @@@ 2
+
+class Solution{
+  public:
+    vector<string> genIp(string &s) {
+        // Your code her
+        vector<string> ret;
+        string ans;
+        
+        for (int a=1; a<=3; a++)
+        for (int b=1; b<=3; b++)
+        for (int c=1; c<=3; c++)
+        for (int d=1; d<=3; d++)
+            if (a+b+c+d == s.length()) {
+                int A = stoi(s.substr(0, a));
+                int B = stoi(s.substr(a, b));
+                int C = stoi(s.substr(a+b, c));
+                int D = stoi(s.substr(a+b+c, d));
+                if (A<=255 && B<=255 && C<=255 && D<=255)
+                    if ( (ans=to_string(A)+"."+to_string(B)+"."+to_string(C)+"."+to_string(D)).length() == s.length()+3)
+                        ret.push_back(ans);
+            }    
+        
+        return ret;
+    }
+
+};

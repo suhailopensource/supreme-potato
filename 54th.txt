@@ -1,0 +1,88 @@
+class Solution {
+  public:
+    string ans;
+    int len  = INT_MIN;
+    void check(int i,int j,string s){
+        while(i>=0 && j<s.size() && s[i] == s[j]){
+            i--;
+            j++;
+        }
+        
+        if(j-i-1>len){
+            len  = j-i-1;
+            ans = s.substr(i+1,len);
+        }
+    }
+    string longestPalin (string S) {
+        // code here
+        for(int i=0;i<S.size();i++){
+            check(i,i,S);
+            check(i,i+1,S);
+        }
+        return ans;
+    }
+};
+
+METHOD @@ 2
+
+class Solution {
+  public:
+    string longestPalin (string S) {
+        // code here
+        int s = 0, e= 0, l = 0, h=0;
+        for(int i = 0; i< S.length();i++){
+            l = i-1, h= i+1;
+            while(l >= 0 and S[i]==S[l]){
+                l--;
+            }
+            while(h < S.size() and S[i]==S[h]){
+                h++;
+            }
+            while(l >= 0 and h < S.size() and S[l]==S[h]){
+                l--;
+                h++;
+            }
+            if(e < h-l-1){
+                s = l+1,
+                e = h-l-1;
+            }
+        }
+        return S.substr(s,e);
+    }
+};
+
+METHOD @@ 3
+
+ class Solution {
+  public:
+    string longestPalin (string S) {
+        int mx=0;
+        int n=S.length();
+        string ans="";
+       for(int i=0;i<n;i++){
+           int left=i;
+           int right=i;
+           while((left>=0 && right<n) && (S[left]==S[right])){
+               if(right-left+1>mx){
+                   mx=right-left+1;
+                   ans=S.substr(left,mx);
+               }
+               left--;
+               right++;
+           }
+       }
+       for(int i=0;i<n;i++){
+           int left=i;
+           int right=i+1;
+           while((left>=0 && right<n) && (S[left]==S[right])){
+               if(right-left+1>mx){
+                   mx=right-left+1;
+                   ans=S.substr(left,mx);
+               }
+               left--;
+               right++;
+           }
+       }
+       return ans;
+    }
+};

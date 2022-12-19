@@ -1,0 +1,26 @@
+class Solution
+{
+	public:
+	void solve(string s, set<string> &ans,int i){
+	    if(i == s.length()){
+	        ans.insert(s);
+	        return;
+	    }
+	    for(int j = i;j<s.length();j++){
+	        swap(s[i],s[j]);
+	        solve(s,ans,i+1);
+	        swap(s[i],s[j]);
+	    }
+	}
+		vector<string>find_permutation(string S)
+		{
+		    // Code here there
+		    vector<string> v;
+		    set<string> ans;
+		    solve(S,ans,0);
+		    for(auto it : ans){
+		        v.push_back(it);
+		    }
+		    return v;
+		}
+};

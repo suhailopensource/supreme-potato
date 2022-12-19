@@ -1,0 +1,74 @@
+        public:
+    int kthElement(int arr1[], int arr2[], int n, int m, int k)
+    {
+        int final[m+n];
+
+//Merge sortin array with STL...........>>>>>>>>
+
+merge(arr1, (arr1 + n), arr2, (arr2 + m), final);
+
+int s;
+
+for (int i = 0; i < (m + n)+2; i++)
+
+{
+
+    if(i==k)
+
+        {
+
+             s=final[i-1];
+
+             return s;
+
+             break;
+
+        }
+
+}
+    }
+};
+
+
+
+METHOD @@ 2
+
+        public:
+    int kthElement(int arr1[], int arr2[], int n, int m, int k)
+    {
+        vector<int>arr(n);
+        int i=0,j=0;
+        int count=0;
+        while(i<n && j<m)
+        {
+            
+            if(arr1[i]<arr2[j])
+            {
+                count++;
+                i++;
+            }
+            else
+            {
+                count++;
+                j++;
+            }
+            if(count==k)
+            {
+                return arr1[i-1]>arr2[j-1]?arr1[i-1]:arr2[j-1];
+            }
+        }
+        if(i==n && count!=k)
+        {
+            j+=k-count-1;
+            return arr2[j];
+        }
+        else if(j==m && count!=k)
+        {
+            i+=k-count-1;
+            return arr1[i];
+        }
+        
+        
+    }
+};
+

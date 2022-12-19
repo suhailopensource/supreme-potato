@@ -1,0 +1,25 @@
+    
+class Solution
+{
+    public:
+    long long divide(long long dividend, long long divisor) 
+    {
+        //code here
+        int sign =(dividend<0 == divisor<0)?1:-1;
+        long x=abs(dividend);
+        long y=abs(divisor);
+        long re=0;
+        long temp=0;
+        for(int i=31;i>=0;i--)
+        {
+            if((temp+(y<<i)) <=x)
+            {
+                temp+=y<<i;
+                re|=(1LL<<i);
+            }
+        }
+        if(sign==-1)
+            return -re;
+        return re;
+    }
+};

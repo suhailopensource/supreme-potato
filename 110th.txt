@@ -1,0 +1,83 @@
+
+class Solution{
+    public:
+    // arr[] : int input array of integers
+    // k : the quadruple sum required
+    vector<vector<int> > fourSum(vector<int> &arr, int target) {
+        // Your code goes here
+        vector<vector<int>> ans;
+        int n = arr.size();
+        sort(arr.begin(),arr.end());
+        int tempi = INT_MIN;
+        for(int i = 0; i < n-2; i++){
+            if(arr[i] == tempi){
+                    continue;
+                }
+            int tempj = INT_MIN;
+            for(int j = i+1;j<n-1;j++){
+                if(arr[j] == tempj){
+                    continue;
+                }
+                int new_target = target - arr[i] - arr[j];
+                int tempk = INT_MIN;
+                for(int k = j+1;k<n;k++){
+                    if(arr[k] == tempk){
+                        continue;
+                    }
+                    if(binary_search(arr.begin()+k+1, arr.end(), new_target - arr[k])){
+                        ans.push_back({arr[i],arr[j], arr[k], new_target - arr[k]});
+                    }
+                        tempk = arr[k];
+                }
+                tempj = arr[j];
+            }
+            tempi = arr[i];
+        }
+        return ans;
+    }
+};
+
+
+METHOD @@ 2
+
+class Solution{
+    public:
+    vector<vector<int>> fourSum(vector<int> &a, int k) {
+    if (a.size() < 4) return {};
+    vector<vector<int>> ans;
+    sort(a.begin(), a.end());
+    for (int i = 0; i < a.size() - 3; ++i) {
+        // current element is greater than k then no quadruplet can be found
+        if (a[i] > 0 && a[i] > k) break;
+        // removing duplicates
+        if (i > 0 && a[i] == a[i - 1]) continue;
+        for (int j = i + 1; j < a.size() - 2; ++j) {
+            // removing duplicates
+            if (j > i + 1 && a[j] == a[j - 1]) continue;
+
+            // taking two pointers
+            int left = j + 1;
+            int right = a.size() - 1;
+            while (left < right) {
+                int old_l = left;
+                int old_r = right;
+                // calculate current sum
+                int sum = a[i] + a[j] + a[left] + a[right];
+                if (sum == k) {
+                    // add to answer
+                    ans.push_back({a[i], a[j], a[left], a[right]});
+
+                    // removing duplicates
+                    while (left < right && a[left] == a[old_l]) left++;
+                    while (left < right && a[right] == a[old_r]) right--;
+                } else if (sum > k) {
+                    right--;
+                } else {
+                    left++;
+                }
+            }
+        }
+    }
+    return ans;
+    }
+};

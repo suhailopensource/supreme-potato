@@ -1,0 +1,27 @@
+class Solution
+{
+  public:
+    string secFrequent (string arr[], int n)
+    {
+        //code here.
+        unordered_map<string,int> mp;
+        int max = 0;
+        for(int i =0; i<n;i++){
+           mp[arr[i]]++;
+           if(mp[arr[i]] > max){
+               max = mp[arr[i]];
+           }
+        }
+        
+        int sec_max = -1;
+        string sec_string = "";
+        for(auto it : mp){
+            if(it.second > sec_max && it.second < max){
+                sec_string =  it.first;
+                sec_max = it.second;
+            }
+        }
+        return sec_string;
+       
+    }
+};

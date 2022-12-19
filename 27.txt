@@ -1,0 +1,64 @@
+string isSubset(int a1[], int a2[], int n, int m) {
+    unordered_map<int, int> mp;
+    for(int i = 0; i < n; i++){
+        mp[a1[i]]++;
+    }
+    for(int i = 0; i<m;i++){
+        auto it = mp.find(a2[i]);
+        if(it == mp.end()){
+            return "No";
+        }else{
+            if((*it).second > 1){
+                (*it).second--;
+            }else{
+                mp.erase(a2[i]);
+            }
+        }
+    }
+    return "Yes";
+}
+
+METHOD @@ 2
+
+
+string isSubset(int a1[], int a2[], int n, int m) {
+    
+    unordered_map<int,int> map;
+    for(int i=0; i<n; i++){
+        map[a1[i]] += 1;
+    }
+    
+    for(int i=0;i<m;i++){
+        if(map[a2[i]] > 0){
+           map[a2[i]] -= 1;
+        }else{
+            return "No";
+        }
+    }
+    return "Yes";
+}
+
+
+METHOD @@ 3
+
+string isSubset(int a1[], int a2[], int n, int m) {
+    string s1="Yes";
+    string s2= "No";
+    // sort(a1,a1+n);
+    // sort(a2,a2+m);
+    unordered_map<int,int>mp1;
+    unordered_map<int,int>mp2;
+    for(int i=0;i<n;i++){
+        mp1[a1[i]]++;
+    }
+    for(int j=0;j<m;j++){
+        mp2[a2[j]]++;
+    }
+    for(int j=0;j<m;j++){
+        if(mp2[a2[j]]>mp1[a2[j]])
+        return s2;
+    }
+    return s1;
+    
+    
+}

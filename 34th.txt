@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int PalinArray(int a[], int n)
+    {
+    	// code here
+    	for(int i = 0; i<n;i++){
+    	    int element = a[i];
+    	    int sum = 0;
+    	    while(element > 0){
+    	        int partofelement = element%10;
+    	        sum = (sum*10) + partofelement;
+    	        element = element/10;
+    	    }
+    	    if(sum != a[i]){
+    	        return false;
+    	    }
+    	}
+    	return true;
+    }
+};

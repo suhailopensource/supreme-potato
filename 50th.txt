@@ -1,0 +1,12 @@
+The String is immutable in Java because of the security, synchronization and concurrency, caching, and class loading. 
+The reason of making string final is to destroy the immutability and to not allow others to extend it.
+ The String objects are cached in the String pool, and it makes the String immutable.
+
+
+
+ANSWER @@ 2
+
+Why string is immutable with example?
+In the String constant pool, a String object is likely to have one or many references. 
+If several references point to the same String without even knowing it, it would be bad if one of the references modified that String value. 
+That's why String objects are immutable.

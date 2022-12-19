@@ -1,0 +1,26 @@
+class Solution{
+    public:
+    int setSetBit(int x, int y, int l, int r){
+        // code here
+        int masklength = (1ll << (r-l+1)) - 1;
+        int mask = (masklength<<(l-1)) & y;
+      return x|mask;
+    }
+};
+
+METHOD @@ 2
+
+   class Solution{
+    public:
+    int setSetBit(int x, int y, int l, int r){
+        if(l<1 || r>32)
+        return x;
+        for(int i=l;i<=r;i++){
+        int mast=1<<(i-1);
+        if(y&mast){
+            x=x|mast;
+        }
+        }
+        return x;
+    }
+};

@@ -1,0 +1,36 @@
+  public:
+    int countSquares(int N) {
+        // code here
+        return sqrt(N-1);
+    }
+};
+
+
+METHOD @@@@ 2
+
+
+  public:
+    int countSquares(int N) {
+        // code here
+        int result = 0;
+    for(int i =1; i*i<N;i++){
+        result++;
+    }
+    return result;
+    }
+};
+
+METHOD @@ 3
+
+
+  public:
+    int countSquares(int N) {
+        // code here
+        int result = 1, i=1;
+        while(result < N){
+           i++;
+            result = i*i;
+        }
+       return i - 1;
+    }
+};

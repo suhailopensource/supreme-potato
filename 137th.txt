@@ -1,0 +1,21 @@
+void MyQueue :: push(int x)
+{
+        // Your Code
+        if(rear > 100005){
+            cout << "queue overflow";
+        }else{
+            arr[++rear] = x;
+        }
+}
+
+//Function to pop an element from queue and return that element.
+int MyQueue :: pop()
+{
+        // Your Code  
+        if(rear == front){
+            return -1;
+        }else{
+            int x = arr[++front];
+            return x;
+        }
+}

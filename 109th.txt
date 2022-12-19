@@ -1,0 +1,41 @@
+
+bool findPair(int arr[], int size, int n){
+    //code
+    unordered_map<int,int> mp;
+    for(int i = 0; i < size;i++){
+       mp[arr[i]]++;
+    }
+    for(int i =0; i<size;i++){
+        int x = arr[i] - n;
+        if(n == 0){
+            mp[arr[i]]--;
+        }
+        if(mp[x]>=1){
+            return true;
+        }
+    }
+    return false;
+}
+
+METHOD @@ 2
+
+bool findPair(int arr[], int size, int n)
+{
+    sort(arr,arr+size);
+    int i = 0;  
+    int j = 1;
+ 
+    while (i<size && j<size)
+    {
+        if (i != j && arr[j]-arr[i] == n)
+        {
+            return true;
+        }
+        else if (arr[j]-arr[i] < n)
+            j++;
+        else
+            i++;
+    }
+ 
+    return false;
+}

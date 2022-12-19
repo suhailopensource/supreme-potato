@@ -1,0 +1,30 @@
+QUESTION LIN K ---  https://practice.geeksforgeeks.org/problems/print-diagonally4331/1
+
+class Solution{
+	
+	public:
+	vector<int> downwardDigonal(int n, vector<vector<int>> A)
+	{
+		vector<int> ans;
+		int i, j, k;
+		for( k=0; k<n; k++){
+		    i=0,j=k;
+		    while(j>=0){
+		        ans.push_back(A[i][j]);
+		        i++,j--;
+		    }
+		}
+		
+		for(k=1;k<n;k++){
+		    i=k,j=n-1;
+		    while(i<n){
+		        ans.push_back(A[i][j]);
+		        i++, j--;
+		    }
+		}
+		
+		
+		return ans;
+	}
+
+};

@@ -1,0 +1,17 @@
+class Solution{
+public:
+	 
+	    // code here
+
+	int rowWithMax1s(vector<vector<int> > arr, int row, int col) {
+	    // code here
+	    for(int i=0;i<col;i++){
+	        for(int j=0;j<row;j++){
+	            if(arr[j][i]==1)
+	            return j;
+	        }
+	    }
+	    return -1;
+	}
+
+};

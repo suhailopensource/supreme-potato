@@ -1,0 +1,29 @@
+QUESTION LINK -- https://www.codingninjas.com/codestudio/problems/common-elements-present-in-all-rows-of-a-matrix_1118111?leftPanelTab=1
+
+#include<bits/stdc++.h>
+
+vector<int> findCommonElements(vector<vector<int>> &mx)
+{
+    // Write your code here
+    int n = mx.size();
+    int m = mx[0].size();
+    unordered_map<int,int> mp;
+    for(int j = 0; j < m; j++){
+        mp[mx[0][j]] = 1;
+    }
+    for(int i = 1; i < n;i++){
+        for(int j = 0; j< m; j++){
+            if(mp.find(mx[i][j]) != mp.end() && mp[mx[i][j]] == i){
+                mp[mx[i][j]]++;
+            }
+        }
+    }
+    vector<int> ans;
+    
+    for(pair<int,int> p : mp){
+        if(p.second == n){
+            ans.push_back(p.first);
+        }
+    }
+    return ans;
+}

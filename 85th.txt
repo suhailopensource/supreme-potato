@@ -1,0 +1,28 @@
+class Solution{
+    public:
+    int solve(int i , int j, string wild ,string pattern){
+       if(i==wild.size() && j == pattern.size()){
+           return 1;
+       }
+       if(wild.size()==0){
+           return 0;
+       }
+       if(j==pattern.size()){
+           if(wild[i]=='*'){
+               return solve(i+1,j, wild,pattern);
+               return 0;
+           }
+       }
+       if(wild[i]== '?' || wild[i]==pattern[j]){
+           return solve(i+1,j+1,wild,pattern);
+       }
+       if(wild[i]=='*'){
+           return solve(i,j+1,wild,pattern) | solve(i+1,j,wild,pattern);
+       }
+    }
+    bool match(string wild, string pattern)
+    {
+        // code here
+         return solve(0,0,wild,pattern);
+    }
+};

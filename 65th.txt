@@ -1,0 +1,55 @@
+class Solution{
+  public:		
+	int lps(string s) {
+	    // Your code goes here
+	    int n = s.length();
+	    int j = 1;
+	    int k = 0;
+	    while(j+k<n){
+	        if(s[k] == s[j+k]){
+	            k++;
+	        }else{
+	            j++; k=0;
+	        }
+	    }
+	    return k;
+	}
+};
+
+
+METHOD @@ 2
+
+//User function template for C++
+
+
+//User function template for C++
+
+class Solution{
+  public:		
+	int lps(string s) {
+	    // Your code goes here
+	    int len = 0;
+	    vector<int> lps(s.length(), 0);
+	    for(int i = 1; i < s.length(); )
+	    {
+	        if(s[i] == s[len])
+	        {
+	            lps[i] = len + 1;
+	            len++;
+	            i++;
+	        }
+	        else
+	        {
+	            if(len == 0)
+	            {
+	                i++;
+	            }
+	            else
+	            {
+	                len = lps[len - 1];
+	            }
+	        }
+	    }
+	    return lps[s.length() - 1];
+	}
+};
